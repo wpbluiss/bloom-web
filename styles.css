@@ -1,6 +1,8 @@
 /* ============================================================
    Bloom: Your Baby's Story — design system
    Warm ivory canvas · terracotta accent · muted sage · charcoal ink
+   Layout: everything horizontally centered via .wrap (margin-inline:
+   auto) + centered text/actions inside each section.
    ============================================================ */
 
 :root {
@@ -49,6 +51,7 @@ a:hover { color: var(--terra); }
 
 ::selection { background: rgba(196, 96, 60, 0.22); }
 
+/* Centered page column: every section lives inside this wrapper */
 .wrap {
   width: 100%;
   max-width: var(--maxw);
@@ -155,6 +158,7 @@ h3 { font-family: var(--serif); font-weight: 600; font-size: 1.35rem; line-heigh
 .btn {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 0.55rem;
   font-family: var(--sans);
   font-weight: 600;
@@ -189,27 +193,27 @@ h3 { font-family: var(--serif); font-weight: 600; font-size: 1.35rem; line-heigh
 
 .btn-sm { padding: 0.7rem 1.2rem; font-size: 0.9rem; }
 
-/* ---------- Hero ---------- */
+/* ---------- Hero (centered single column) ---------- */
 
 .hero { padding: clamp(4rem, 9vw, 7.5rem) 0 clamp(3.5rem, 7vw, 5.5rem); }
 
 .hero .wrap {
   display: grid;
-  grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
-  gap: clamp(2.5rem, 6vw, 5rem);
-  align-items: center;
+  grid-template-columns: minmax(0, 1fr);
+  gap: clamp(2.5rem, 6vw, 4rem);
+  justify-items: center;
+  text-align: center;
 }
 
-@media (max-width: 880px) {
-  .hero .wrap { grid-template-columns: 1fr; }
-}
+.hero .lede { margin-inline: auto; }
 
-.hero-mark { width: 52px; height: 52px; margin-bottom: 1.4rem; }
+.hero-mark { width: 52px; height: 52px; margin: 0 auto 1.4rem; }
 
 .hero-actions {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
+  justify-content: center;
   gap: 1rem 1.4rem;
   margin-top: 2.2rem;
 }
@@ -220,6 +224,7 @@ h3 { font-family: var(--serif); font-weight: 600; font-size: 1.35rem; line-heigh
   margin-top: 1.1rem;
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 0.5rem;
 }
 .hero-note svg { width: 15px; height: 15px; flex: none; }
@@ -231,8 +236,8 @@ h3 { font-family: var(--serif); font-weight: 600; font-size: 1.35rem; line-heigh
   letter-spacing: 0.02em;
 }
 
-/* Keepsake card visual (pure CSS, no imagery) */
-.keepsake { position: relative; margin: 0; min-height: 360px; }
+/* Keepsake card visual (pure CSS, no imagery) — centered under the hero copy */
+.keepsake { position: relative; margin: 0 auto; width: min(100%, 36rem); min-height: 380px; }
 
 .keepsake-card {
   position: absolute;
@@ -243,6 +248,7 @@ h3 { font-family: var(--serif); font-weight: 600; font-size: 1.35rem; line-heigh
   border-radius: 20px;
   padding: 1.6rem 1.7rem 1.4rem;
   box-shadow: var(--shadow-soft);
+  text-align: left;
 }
 
 .keepsake-card .kc-week {
@@ -275,14 +281,14 @@ h3 { font-family: var(--serif); font-weight: 600; font-size: 1.35rem; line-heigh
 }
 .keepsake-card .kc-meta svg { width: 14px; height: 14px; }
 
-.keepsake-card.kc-front { top: 4%; left: 12%; transform: rotate(-2.5deg); z-index: 2; }
-.keepsake-card.kc-back  { top: 56%; left: 28%; transform: rotate(2deg); background: var(--ivory-deep); z-index: 1; }
+.keepsake-card.kc-front { top: 4%; left: 10%; transform: rotate(-2.5deg); z-index: 2; }
+.keepsake-card.kc-back  { top: 56%; left: 32%; transform: rotate(2deg); background: var(--ivory-deep); z-index: 1; }
 .keepsake-card.kc-back .kc-line { font-size: 1.1rem; color: var(--muted); }
 
 @media (max-width: 880px) {
   .keepsake { min-height: 400px; margin-top: 1rem; }
-  .keepsake-card.kc-front { left: 2%; }
-  .keepsake-card.kc-back { left: 14%; }
+  .keepsake-card.kc-front { left: 4%; }
+  .keepsake-card.kc-back { left: 18%; }
 }
 
 /* ---------- Trust bar ---------- */
@@ -317,14 +323,21 @@ h3 { font-family: var(--serif); font-weight: 600; font-size: 1.35rem; line-heigh
 .section { padding: clamp(4.5rem, 9vw, 7.5rem) 0; }
 .section + .section { border-top: 1px solid var(--hairline); }
 
-.section-head { max-width: 46rem; margin-bottom: clamp(2.5rem, 5vw, 4rem); }
+/* Section intros: centered headline + copy, capped reading width */
+.section-head {
+  max-width: 46rem;
+  margin-inline: auto;
+  margin-bottom: clamp(2.5rem, 5vw, 4rem);
+  text-align: center;
+}
+.section-head .lede { margin-inline: auto; }
 
 .grid-3 {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 1.5rem;
 }
-@media (max-width: 880px) { .grid-3 { grid-template-columns: 1fr; } }
+@media (max-width: 880px) { .grid-3 { grid-template-columns: 1fr; max-width: 30rem; margin-inline: auto; } }
 
 .card {
   background: var(--cream);
@@ -332,6 +345,7 @@ h3 { font-family: var(--serif); font-weight: 600; font-size: 1.35rem; line-heigh
   border-radius: 18px;
   padding: 2rem 1.9rem;
   box-shadow: var(--shadow-card);
+  text-align: center;
 }
 
 .card .icon {
@@ -340,7 +354,7 @@ h3 { font-family: var(--serif); font-weight: 600; font-size: 1.35rem; line-heigh
   border-radius: 14px;
   display: grid;
   place-items: center;
-  margin-bottom: 1.3rem;
+  margin: 0 auto 1.3rem;
   background: rgba(143, 160, 138, 0.16);
   color: var(--sage-deep);
 }
@@ -348,16 +362,25 @@ h3 { font-family: var(--serif); font-weight: 600; font-size: 1.35rem; line-heigh
 .card .icon svg { width: 24px; height: 24px; }
 .card p { margin: 0; color: var(--muted); font-size: 0.98rem; }
 
-/* Split section */
+/* Split section: centered stack — intro + checklist centered, timeline card centered below */
 .split {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: clamp(2.5rem, 6vw, 5rem);
-  align-items: center;
+  grid-template-columns: minmax(0, 1fr);
+  gap: clamp(2.5rem, 6vw, 4rem);
+  justify-items: center;
+  text-align: center;
 }
-@media (max-width: 880px) { .split { grid-template-columns: 1fr; } }
+.split .lede { margin-inline: auto; }
 
-.check-list { list-style: none; margin: 1.8rem 0 0; padding: 0; display: grid; gap: 1rem; }
+.check-list {
+  list-style: none;
+  margin: 1.8rem auto 0;
+  padding: 0;
+  display: grid;
+  gap: 1rem;
+  max-width: 36rem;
+  text-align: left;
+}
 .check-list li { display: flex; gap: 0.8rem; align-items: flex-start; color: var(--muted); }
 .check-list li strong { color: var(--charcoal); font-weight: 600; }
 .check-list svg { width: 20px; height: 20px; flex: none; margin-top: 0.15rem; color: var(--terra-deep); }
@@ -369,6 +392,9 @@ h3 { font-family: var(--serif); font-weight: 600; font-size: 1.35rem; line-heigh
   border-radius: 20px;
   box-shadow: var(--shadow-soft);
   padding: 2rem 2rem 1.4rem;
+  width: min(100%, 42rem);
+  margin-inline: auto;
+  text-align: left;
 }
 .timeline ol { list-style: none; margin: 0; padding: 0; }
 .timeline li {
@@ -401,15 +427,16 @@ h3 { font-family: var(--serif); font-weight: 600; font-size: 1.35rem; line-heigh
 .waitlist .hero-actions { justify-content: center; }
 .waitlist .sprout-center { width: 44px; height: 44px; margin: 0 auto 1.4rem; }
 
-/* ---------- Footer ---------- */
+/* ---------- Footer (centered stack) ---------- */
 
 .site-footer { padding: 3rem 0 3.5rem; }
 
 .site-footer .wrap {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   align-items: center;
-  gap: 1.2rem 2rem;
+  text-align: center;
+  gap: 1.4rem;
 }
 
 .site-footer .brand svg { width: 24px; height: 24px; }
@@ -417,8 +444,9 @@ h3 { font-family: var(--serif); font-weight: 600; font-size: 1.35rem; line-heigh
 
 .footer-links {
   display: flex;
-  gap: 1.6rem;
-  margin-left: auto;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.6rem 1.6rem;
   font-size: 0.92rem;
 }
 .footer-links a { color: var(--muted); text-decoration: none; }
@@ -426,18 +454,21 @@ h3 { font-family: var(--serif); font-weight: 600; font-size: 1.35rem; line-heigh
 
 .footer-legal {
   width: 100%;
-  margin: 1rem 0 0;
+  max-width: 44rem;
+  margin: 0;
   padding-top: 1.4rem;
   border-top: 1px solid var(--hairline);
   font-size: 0.85rem;
   color: var(--muted);
+  text-align: center;
 }
 
 /* ---------- Sub pages (privacy / support) ---------- */
 
 .page-main { padding: clamp(3.5rem, 7vw, 5.5rem) 0 clamp(4rem, 8vw, 6rem); }
 
-.prose { max-width: 44rem; }
+/* Long-form pages: centered column, left-aligned reading text */
+.prose { max-width: 44rem; margin-inline: auto; }
 .prose h2 {
   font-family: var(--serif);
   font-weight: 600;
@@ -495,9 +526,26 @@ h3 { font-family: var(--serif); font-weight: 600; font-size: 1.35rem; line-heigh
   display: flex;
   flex-wrap: wrap;
   align-items: center;
+  justify-content: center;
+  text-align: center;
   gap: 1.2rem 2rem;
 }
-.contact-card p { margin: 0; color: var(--muted); flex: 1 1 20rem; }
+.contact-card p { margin: 0; color: var(--muted); flex: 1 1 100%; }
+
+/* ---------- Small screens: centered, proportional, full-width CTAs ---------- */
+
+@media (max-width: 560px) {
+  .hero-actions {
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+    max-width: 22rem;
+    margin-inline: auto;
+  }
+  .hero-actions .btn { width: 100%; }
+  .hero-actions .tagline { text-align: center; }
+  .contact-card .btn { width: 100%; }
+}
 
 /* ---------- Motion ---------- */
 
